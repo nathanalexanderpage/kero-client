@@ -206,15 +206,15 @@ class Task extends Component {
                </Link>
              </div>
            </CardTitle>
-           <CardBody>
+           <CardBody className="mainTask">
              <div>
                <Row>
-                 <Col>
+                 <Col className="taskInfo">
                    <img  draggable="false" id="usertask" src={ this.getPicture(this.props.task.assignedTo)}  />
                      {this.getName(this.props.task.assignedTo)}
                      {this.props.children}
                  </Col>
-                 <Col>
+                 <Col className="taskInfo">
                    {this.props.task.title}
                  </Col>
                </Row>
