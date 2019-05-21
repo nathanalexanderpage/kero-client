@@ -70,7 +70,9 @@ class Task extends Component {
       })
     }
     if (this.props.task.dateCompleted) {
-      dateCompleted: this.props.task.dateCompleted.slice(0,10)
+      this.setState({
+        dateCompleted: this.props.task.dateCompleted.slice(0,10)
+      })
     }
   }
 
@@ -320,7 +322,6 @@ class Task extends Component {
           </Form>
         </Modal>
 
-
         <Modal
           isOpen={this.state.modalSee}
           toggle={this.toggleSee}
@@ -333,7 +334,7 @@ class Task extends Component {
                 type="select"
                 name="assignedTo"
               >
-                {newList}
+                <option>{this.getName(this.props.task.assignedTo)}</option>
               </Input>
               <Label>Title</Label>
               <Input
