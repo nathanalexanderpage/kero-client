@@ -21,15 +21,23 @@ class Task extends Component {
       dateCompleted: '',
       description: '',
       sprint: this.props.sprintId,
-      userList: []
+      userList: [],
+      modalSee:false
     };
 
     this.toggle = this.toggle.bind(this);
+    this.toggleSee = this.toggleSee.bind(this)
   }
 
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
+    }));
+  }
+
+  toggleSee() {
+    this.setState(prevState => ({
+      modalSee: !prevState.modalSee
     }));
   }
 
@@ -216,6 +224,7 @@ class Task extends Component {
                </Link>
              </div>
            </CardTitle>
+          <Link draggable="false" onClick={() => this.toggleSee()} >
            <CardBody className="mainTask">
              <div>
                <Row>
@@ -230,6 +239,7 @@ class Task extends Component {
                </Row>
              </div>
            </CardBody>
+        </Link>
          </Card>
 
 
@@ -308,6 +318,74 @@ class Task extends Component {
               <Button color="secondary" onClick={this.toggle}>Cancel</Button>
             </ModalFooter>
           </Form>
+        </Modal>
+
+
+        <Modal
+          isOpen={this.state.modalSee}
+          toggle={this.toggleSee}
+          className={this.props.className}
+        >
+            <ModalHeader toggle={this.toggleSee}>Task Details</ModalHeader>
+            <ModalBody>
+              <Label for="assignedTo">Assigned To</Label>
+              <Input
+                type="select"
+                name="assignedTo"
+              >
+                {newList}
+              </Input>
+              <Label>Title</Label>
+              <Input
+                type="text"
+                name="title"
+                placeholder="Give it a name"
+                value={this.state.title}
+              />
+              <Label>Man hours</Label>
+              <Input
+                type="number"
+                name="manHourBudget"
+                placeholder="How many hours?"
+                value={this.state.manHourBudget}
+              />
+              <Label for="Select Role">Status</Label>
+              <Input
+                type="select"
+                name="status"
+                value={this.state.status}
+              >
+                <option defaultValue="todo">To Do</option>
+                <option value="inprogress">In progress</option>
+                <option value="codereview">Code review</option>
+                <option value="done">Done</option>
+              </Input>
+              <Label>Assigned Date</Label>
+              <Input
+                type="date"
+                name="dateAssigned"
+                placeholder="date placeholder"
+                value={this.state.dateAssigned}
+              />
+              <Label>Completed Date</Label>
+              <Input
+                type="date"
+                name="dateCompleted"
+                placeholder="date placeholder"
+                value={this.state.dateCompleted}
+              />
+              <Label>Description</Label>
+              <Input
+                type="textarea"
+                name="description"
+                placeholder="Write something"
+                rows={5}
+                value={this.state.description}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.toggleSee}>Close</Button>
+            </ModalFooter>
         </Modal>
       </div>
 
