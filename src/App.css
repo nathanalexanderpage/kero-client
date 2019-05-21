@@ -169,6 +169,25 @@ body{
 .sign-in {
   margin: 50px;
   text-align: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.sign-up {
+  margin: 50px;
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.sign-up-opening {
+  margin: 50px;
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .your-sprints {

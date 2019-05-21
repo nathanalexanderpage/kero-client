@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input, Fade, Col } from 'reactstrap';
+import { Button, Form, Label, Input, Fade, Col, Row } from 'reactstrap';
 
 class Signup extends Component {
   constructor(props){
@@ -62,11 +62,13 @@ class Signup extends Component {
 
     return(
       <div>
-        <h2>Sign up as a new user!</h2>
-        <h6> If you already have an account, go log in!</h6>
-        <Form onSubmit={this.handleSubmit}>
-            <Col xs="9"></Col>
-              <FormGroup row>
+        <div className="sign-up-opening">
+          <h2>Sign up as a new user!</h2>
+          <h6> If you already have an account,<Link to="/login"> log in</Link> </h6>
+        </div>
+        <Form onSubmit={this.handleSubmit} className="sign-up">
+            <Row>
+              <Col xs="6">
                 <Label for="firstName">First Name</Label>
                 <Input type="text"
                         name="firstName"
@@ -74,8 +76,8 @@ class Signup extends Component {
                         placeholder="My first name is..."
                         value={this.state.firstName}
                         onChange={this.handleFirstNameChange} />
-              </FormGroup>
-              <FormGroup row>
+              </Col>
+              <Col xs="6">
                 <Label for="lastName">Last Name</Label>
                 <Input type="text"
                         name="lastName"
@@ -83,8 +85,10 @@ class Signup extends Component {
                         placeholder="My last name is..."
                         value={this.state.lastName}
                         onChange={this.handleLastNameChange} />
-              </FormGroup>
-              <FormGroup row>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="6">
                 <Label for="company">Company</Label>
                 <Input type="text"
                         name="company"
@@ -92,8 +96,8 @@ class Signup extends Component {
                         placeholder="I work at..."
                         value={this.state.company}
                         onChange={this.handleCompanyChange} />
-              </FormGroup>
-              <FormGroup row>
+              </Col>
+              <Col xs="6">
                 <Label for="email">Email</Label>
                 <Input type="email"
                         name="email"
@@ -101,36 +105,39 @@ class Signup extends Component {
                         placeholder="example@email.com"
                         value={this.state.email}
                         onChange={this.handleEmailChange} />
-              </FormGroup>
-              <FormGroup row>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="6">
                 <Label for="password">Password</Label>
                 <Input type="password"
                         name="password"
                         id="password"
                         placeholder="shhhh"
                         onChange={this.handlePasswordChange} />
-              </FormGroup>
-              <FormGroup row>
+              </Col>
+              <Col xs="6">
                 <Label for="passwordVerify">Verify Password</Label>
                 <Input type="password"
                         name="passwordVerify"
                         id="verify-password"
                         placeholder="confirm shhhh"
                         onChange={this.handlePasswordChange} />
-              </FormGroup>
-              <FormGroup row>
-                <Label for="Select Role">Select Role</Label>
-                <Input type="select"
-                        name="select-role"
-                        id="select-role"
-                        value={this.state.role}
-                        onChange={this.handleRoleChange}>
-                          <option defaultValue="user">User</option>
-                          <option value="admin">Admin</option>
-                          <option value="stakeholder">Stake Holder</option>
-                </Input>
-              </FormGroup>
-              <FormGroup row>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="6">
+                  <Label for="Select Role">Select Role</Label>
+                  <Input type="select"
+                          name="select-role"
+                          id="select-role"
+                          value={this.state.role}
+                          onChange={this.handleRoleChange}>
+                            <option defaultValue="user">User</option>
+                            <option value="admin">Admin</option>
+                            <option value="stakeholder">Stake Holder</option></Input>
+                </Col>
+                <Col xs="6">
                 <Label for="Image">Image</Label>
                 <Input type="text"
                         name="image"
@@ -138,11 +145,13 @@ class Signup extends Component {
                         placeholder="put image url here..."
                         value={this.state.image}
                         onChange={this.handleImageChange}/>
-              </FormGroup>
-            <div>
-              <Button outline color="secondary" size="lg" onClick={this.handleSubmit}>Sign Up</Button>
-              <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
-            </div>
+                </Col>
+              </Row>
+              <br></br>
+              <div>
+                <Button color="secondary" size="lg" onClick={this.handleSubmit}>Sign Up</Button>
+                <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
+              </div>
         </Form>
       </div>
     );
