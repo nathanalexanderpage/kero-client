@@ -184,5 +184,17 @@ body{
   width: 3vw;
   height: 5vh;
   border-radius: 50%;
+  border: 2px solid black;
+}
 
+.taskInfo{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainTask{
+  margin-top: 10px;
 }

@@ -46,7 +46,7 @@ class Task extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props.users);
+    console.log("this from component did mount task",this.props.users);
     this.setState({
       assignedTo: this.props.task.assignedTo,
       title: this.props.task.title,
@@ -195,32 +195,33 @@ class Task extends Component {
 
     return (
       <div className="tasks" id={this.props.id} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDrop={this.changeState}>
-        <Card>
-          <CardTitle className="tasktools">
-            <div>
-              <Link draggable="false" onClick={() => this.handleDeleteTask()} >
-                <FaTrash  id="deleteicon"/>
-              </Link>
-              <Link draggable="false" onClick={() => this.toggle()} >
-                <FaWrench  id="modifyicon"/>
-              </Link>
-            </div>
-          </CardTitle>
-          <CardBody>
-            <div>
-              <Row>
-                <Col>
-                  <img  draggable="false" id="usertask" src={ this.getPicture(this.props.task.assignedTo)}  />
-                    {this.getName(this.props.task.assignedTo)}
-                    {this.props.children}
-                </Col>
-                <Col>
-                  {this.props.task.title}
-                </Col>
-              </Row>
-            </div>
-          </CardBody>
-        </Card>
+         <Card>
+           <CardTitle className="tasktools">
+             <div>
+               <Link draggable="false" onClick={() => this.handleDeleteTask()} >
+                 <FaTrash  id="deleteicon"/>
+               </Link>
+               <Link draggable="false" onClick={() => this.toggle()} >
+                 <FaWrench  id="modifyicon"/>
+               </Link>
+             </div>
+           </CardTitle>
+           <CardBody className="mainTask">
+             <div>
+               <Row>
+                 <Col className="taskInfo">
+                   <img  draggable="false" id="usertask" src={ this.getPicture(this.props.task.assignedTo)}  />
+                     {this.getName(this.props.task.assignedTo)}
+                     {this.props.children}
+                 </Col>
+                 <Col className="taskInfo">
+                   {this.props.task.title}
+                 </Col>
+               </Row>
+             </div>
+           </CardBody>
+         </Card>
+
 
         <Modal
           isOpen={this.state.modal}

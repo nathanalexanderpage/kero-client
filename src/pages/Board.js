@@ -118,7 +118,7 @@ class Board extends Component {
     })
   }
 
-  // TODO Make call to DB to get all tasks associated with user, then set state to returned tasks
+
 
   render() {
     if(!this.props.user){
@@ -134,7 +134,7 @@ class Board extends Component {
     let codeReview = []
     let complete = []
 
-    // iterate through this.state.tasks and push tasks to their relevant array
+
 
 
     this.state.tasks.forEach((task) => {
