@@ -20,7 +20,8 @@ class Board extends Component {
       dateCompleted: '',
       description: '',
       tasks: [],
-      userList: []
+      userList: [],
+      sprintData:{}
     };
 
     this.toggle = this.toggle.bind(this);
@@ -46,6 +47,9 @@ class Board extends Component {
     this.loadSprintData()
   }
 
+
+
+
   loadSprintData = () => {
     let token = localStorage.getItem('serverToken');
     axios.get(`${SERVER_URL}/sprints/${this.state.sprint}/tasks`, {
@@ -54,8 +58,6 @@ class Board extends Component {
       }
     })
     .then(foundSprints => {
-      console.log('Success getting Sprints');
-      console.log(foundSprints.data);
       this.setState({ tasks: foundSprints.data })
     })
     .catch(err => {
@@ -69,9 +71,22 @@ class Board extends Component {
       }
     })
     .then(foundUsers => {
-      console.log('Success getting user list');
-      console.log(foundUsers.data);
       this.setState({ userList: foundUsers.data })
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    });
+
+    axios.get(`${SERVER_URL}/sprints/${this.state.sprint}`, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(foundSprint => {
+      console.log('Success getting LAST Sprint info');
+      console.log(foundSprint.data);
+     this.setState({ sprintData: foundSprint.data })
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -165,13 +180,23 @@ class Board extends Component {
       <Container>
         <Row>
           <Col>
-            <div>{this.props.sprint}</div>
-            <h1>{this.props.title}</h1>
-            <Form inline onSubmit={(e) => e.preventDefault()}>
-              <Button color="secondary"
-                onClick={this.toggle}
-                id="new-task">New Task</Button>
-            </Form>
+            <Row className="boardInfo">
+              <Col>
+                <div><h1>Title : {this.state.sprintData.title}</h1></div>
+              </Col>
+              <Col>
+                Start Date:{this.state.sprintData.startDate}<br/>
+                Finish Date:{this.state.sprintData.finishDate}
+              </Col>
+              <Col>
+                <Form inline onSubmit={(e) => e.preventDefault()}>
+                  <Button color="secondary"
+                    onClick={this.toggle}
+                    id="new-task">New Task
+                  </Button>
+                </Form>
+              </Col>
+            </Row>
             <Row id="mainboard">
               <Col>
                 <Swimlane id="dr1" title="To-Do" tasks={toDo} users={this.state.userList} titleStatus="todo" rerender={this.props.rerender} />
