@@ -118,7 +118,6 @@ class Task extends Component {
       return finalResult[0]
   }
 
-
   handleSubmit = (e) => {
     e.preventDefault();
     let newState = {...this.state}
