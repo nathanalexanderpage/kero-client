@@ -1,1 +1,1 @@
-export default 'https://kerodata.herokuapp.com';
+export default 'https://kerokero.herokuapp.com';
