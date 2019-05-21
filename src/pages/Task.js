@@ -52,7 +52,7 @@ class Task extends Component {
       title: this.props.task.title,
       manHourBudget: this.props.task.manHourBudget,
       status: this.props.task.status,
-      description: this.props.task.desc,
+      description: this.props.task.description,
       sprint: this.props.task.sprint,
       userList: this.props.users
     })
@@ -173,13 +173,24 @@ class Task extends Component {
       if (this.props.users[0]) {
         userList.push(<option>TBD</option>);
         throwaway = this.props.users.map((user, i) => {
-          return (
-            <option
-            value={user.id}
-            >
-            {`${user.firstName} ${user.lastName}`}
-            </option>
-          )
+          if (user.id === this.props.task.assignedTo) {
+            return (
+              <option
+                default
+                value={user.id}
+              >
+                {`${user.firstName} ${user.lastName}`}
+              </option>
+            )
+          } else {
+            return (
+              <option
+                value={user.id}
+              >
+                {`${user.firstName} ${user.lastName}`}
+              </option>
+            )
+          }
         });
         while (throwaway.length !== 0) {
           userList.push(throwaway.shift())
