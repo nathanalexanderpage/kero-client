@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Card, CardTitle, CardBody, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
 import {  Link } from 'react-router-dom';
-import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
+import { FaTrash, FaWrench} from "react-icons/fa";
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
 
@@ -83,12 +83,12 @@ class Task extends Component {
     axios.delete(`${SERVER_URL}/tasks/${this.props.id}`,
       {
         headers: {
-         'Authorization' : `Bearer ${token}`
-       }
-     })
+        'Authorization' : `Bearer ${token}`
+      }
+    })
     .then(response=> {
-     console.log("deleted", response);
-     this.props.rerender();
+    console.log("deleted", response);
+    this.props.rerender();
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -103,7 +103,7 @@ class Task extends Component {
         if(Wanteduser.id == user){
           return  Wanteduser.image
         }
-     });
+    });
     let finalResult = result.filter(options => options != undefined)
       return finalResult[0]
   }
@@ -113,7 +113,7 @@ class Task extends Component {
         if(Wanteduser.id == user){
           return  Wanteduser.firstName
         }
-     });
+    });
     let finalResult = result.filter(options => options != undefined)
       return finalResult[0]
   }
@@ -222,6 +222,7 @@ class Task extends Component {
            </CardBody>
          </Card>
 
+
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -282,14 +283,6 @@ class Task extends Component {
                 value={this.state.dateCompleted}
                 onChange={this.handleDateCompletedChange}
               />
-                {/*/   <Label>Prerequisite Tasks</Label>
-              // <Input
-              //   type="text"
-              //   name="prerequisiteTasks"
-              //   placeholder="related tasks"
-              //   value={this.state.prerequisiteTasks}
-              //   onChange={this.handlePrerequisiteTasksChange}
-              //     >*/}
               <Label>Description</Label>
               <Input
                 type="textarea"
