@@ -6,7 +6,7 @@
     "node": "v11.13.0"
   },
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^3.2.2",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "node-constants": "0.0.2",
